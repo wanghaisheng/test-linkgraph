@@ -20,18 +20,18 @@ async def main():
         TOTAL_TRAFFIC=page.locator("div.sc-jNxMLV:nth-child(2)").text_content()
         RANKING_POTENTIAL=page.locator("div.sc-jNxMLV:nth-child(3)").text_content()
         row_counts=page.locator("tr.ant-table-row:nth-child").count()
-        print(f'MONTHLY_SEARCH_VOLUME'{MONTHLY_SEARCH_VOLUME})
-        print(f'TOTAL_TRAFFIC'{TOTAL_TRAFFIC})
-        print(f'RANKING_POTENTIAL'{RANKING_POTENTIAL})
-        print(f'row_counts'{row_counts})
+        print(f'MONTHLY_SEARCH_VOLUME{MONTHLY_SEARCH_VOLUME}')
+        print(f'TOTAL_TRAFFIC-{TOTAL_TRAFFIC}')
+        print(f'RANKING_POTENTIAL-{RANKING_POTENTIAL}')
+        print(f'row_counts-{row_counts}')
 
         for i in range(0,row_counts):
           KEYWORDS_IN_CLUSTER =page.locator("td.ant-table-cell").nth(1)
           MSV =page.locator("td.ant-table-cell").nth(2)
           CPC =page.locator("td.ant-table-cell").nth(3)
-          print(f'KEYWORDS_IN_CLUSTER'{KEYWORDS_IN_CLUSTER})
-          print(f'MSV'{MSV})
-          print(f'CPC'{CPC})
+          print(f'KEYWORDS_IN_CLUSTER-{KEYWORDS_IN_CLUSTER}')
+          print(f'MSV-{MSV}')
+          print(f'CPC-{CPC}')
 
           # Continue by using the Page
 
