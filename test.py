@@ -9,7 +9,7 @@ async def main():
     page = await browser.new_page()
     url="https://dashboard.linkgraph.com/content/content-planner/3946af54-e8f1-4f9b-b72f-5b79e6bc5e0e"
     await page.goto(url)
-
+    visible = await page.get_by_role("Highest reward with least effort").is_visible()
       
     await page.locator("//html/body/div[1]/div/div[2]/div[2]/div/div[2]/div[2]/div/div/div[3]/div[1]/div/div/div[1]/svg").click()
     counts=await page.get_by_label("View Cluster").count()
