@@ -4,7 +4,7 @@ import botright
 
 
 async def main():
-    botright_client = await botright.Botright(headless=False)
+    botright_client = await botright.Botright(headless=True)
     browser = await botright_client.new_browser()
     page = await browser.new_page()
     url="https://dashboard.linkgraph.com/content/content-planner/3946af54-e8f1-4f9b-b72f-5b79e6bc5e0e"
