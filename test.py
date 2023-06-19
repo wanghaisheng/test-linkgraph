@@ -11,7 +11,7 @@ async def main():
     await page.goto(url)
 
       
-    await page.locator("/html/body/div[1]/div/div[2]/div[2]/div/div[2]/div[2]/div/div/div[3]/div[1]/div/div/div[1]/svg").click()
+    await page.locator("//html/body/div[1]/div/div[2]/div[2]/div/div[2]/div[2]/div/div/div[3]/div[1]/div/div/div[1]/svg").click()
     counts=await page.get_by_label("View Cluster").count()
     for i in range(0,counts):   
         topic=await page.get_by_label("View Cluster").nth(i)
