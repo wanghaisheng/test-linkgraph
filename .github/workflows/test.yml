@@ -46,7 +46,7 @@ jobs:
         run: python -m playwright install --with-deps          
       - name: run demo
         run: |
-          python test.py
+          env HOME=/root python test.py
       - name: Config git
         run: >
           git config --local user.email "ations@github.com"
