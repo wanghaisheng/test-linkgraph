@@ -28,7 +28,8 @@ async def nologin():
     locator = page.locator('button.ant-btn.ant-btn-default.sc-bczRLJ.gtzvtM')
     print(await locator.text_content())
     await expect(locator).to_have_text("Export")
-
+    # /html/body/div[1]/div/div/div[2]/div[2]/div[2]/div/div/div[3]/div[1]/div/div/div[1]/svg
+    await page.locator("//html/body/div[1]/div/div[2]/div[2]/div/div[2]/div[2]/div/div/div[3]/div[1]/div/div/div[1]/svg").click()
     counts=await page.get_by_label("View Cluster").count()
     print('coubts',counts)
     for i in range(0,counts):   
