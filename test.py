@@ -30,8 +30,11 @@ async def nologin():
     await expect(locator).to_have_text("Export")
 
     counts=await page.get_by_label("View Cluster").count()
+    print('coubts',counts)
     for i in range(0,counts):   
         topic=await page.get_by_label("View Cluster").nth(i)
+        print(f'i{i')
+        
         await topic.click()
         MONTHLY_SEARCH_VOLUME=await page.locator("div.sc-jNxMLV:nth-child(1)").text_content()
         TOTAL_TRAFFIC=await page.locator("div.sc-jNxMLV:nth-child(2)").text_content()
@@ -51,10 +54,6 @@ async def nologin():
           print(f'CPC-{CPC}')
 
           # Continue by using the Page
-    await page.goto(url)
-    visible=    await page.get_by_role("button", name="View Topics").is_visible()
-    await page.get_by_label("more").click()
-    # await page.locator(".ant-dropdown-menu-title-content > span:nth-child(1)").click()
     await botright_client.close()
 
 async def main():
