@@ -24,8 +24,8 @@ async def nologin():
     await page.goto(url)
 
     time.sleep(120)
-    print(await page.content())
-    locator = page.locator('#__next > div > div > div:nth-child(2) > div.sc-eZEUqN.rdECQ > div.ant-row.ant-row-no-wrap.ant-row-space-between > div:nth-child(2) > div:nth-child(1) > button:nth-child(2)')
+    # print(await page.content())
+    locator = page.locator('button.ant-btn.ant-btn-default.sc-bczRLJ.gtzvtM')
     print(await locator.text_content())
     await expect(locator).to_have_text("Export")
 
