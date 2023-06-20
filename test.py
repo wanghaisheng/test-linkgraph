@@ -34,7 +34,7 @@ async def nologin():
     print('coubts',counts)
     for i in range(0,counts):   
         topic=await page.get_by_label("View Cluster").nth(i)
-        print(f'i{i')
+        print(f'i{i}')
         
         await topic.click()
         MONTHLY_SEARCH_VOLUME=await page.locator("div.sc-jNxMLV:nth-child(1)").text_content()
