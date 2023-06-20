@@ -1,27 +1,9 @@
 import asyncio
 
 import botright
+import time 
 
 
-
-#     context = browser.new_context(base_url="https://api.github.com")
-#     api_request_context = context.request
-#     page = context.new_page()
-
-#     # Alternatively you can create a APIRequestContext manually without having a browser context attached:
-#     # api_request_context = p.request.new_context(base_url="https://api.github.com")
-
-
-#     # Create a repository.
-#     response = api_request_context.post(
-#         "/user/repos",
-#         headers={
-#             "Accept": "application/vnd.github.v3+json",
-#             # Add GitHub personal access token.
-#             "Authorization": f"token {API_TOKEN}",
-#         },
-#         data={"name": REPO},
-#     )
 async def main():
     botright_client = await botright.Botright(headless=True)
 
@@ -41,9 +23,7 @@ async def main():
     await page.goto(url)
     visible = await page.get_by_placeholder('Enter a keyword like "Garden Tools"').is_visible()
     await page.get_by_placeholder('Enter a keyword like "Garden Tools"').fill(keyword)
-      
-    visible = await page.get_by_placeholder("Enter a keyword like "Garden Tools"").is_visible()
-    await page.get_by_role("button", name="Generate Keyword Clusters").click()
+    time.sleep(120)
     visible=    await page.get_by_role("button", name="View Topics").is_visible()
     await page.get_by_role("button", name="View Topics").click()
     
