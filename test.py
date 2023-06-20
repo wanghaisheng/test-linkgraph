@@ -27,6 +27,7 @@ async def nologin():
     # print(await page.content())
     locator = page.locator('button.ant-btn.ant-btn-default.sc-bczRLJ.gtzvtM')
     print(await locator.text_content())
+    print('====',page.url)
     await expect(locator).to_have_text("Export")
     # /html/body/div[1]/div/div/div[2]/div[2]/div[2]/div/div/div[3]/div[1]/div/div/div[1]/svg
     # await page.get_by_role("button", name="All Clusters").click()
