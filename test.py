@@ -4,6 +4,8 @@ import botright
 import time 
 import os
 
+import re
+from playwright.async_api import expect
 
 async def main():
     botright_client = await botright.Botright(headless=True)
@@ -25,9 +27,10 @@ async def main():
     visible = await page.get_by_placeholder('Enter a keyword like "Garden Tools"').is_visible()
     await page.get_by_placeholder('Enter a keyword like "Garden Tools"').fill(keyword)
     time.sleep(120)
-    visible=    await page.get_by_role("button", name="View Topics").is_visible()
-    await page.get_by_role("button", name="View Topics").click()
-    
+    locator = page.locator('tr.ant-table-row:nth-child(1) > td:nth-child(4) > div:nth-child(1) > button:nth-child(1) > span:nth-child(1)')
+    await expect(locator).to_contain_text("View Topics")
+    await locator.click()
+
     await page.locator("//html/body/div[1]/div/div[2]/div[2]/div/div[2]/div[2]/div/div/div[3]/div[1]/div/div/div[1]/svg").click()
     counts=await page.get_by_label("View Cluster").count()
     for i in range(0,counts):   
