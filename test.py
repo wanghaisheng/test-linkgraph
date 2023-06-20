@@ -29,7 +29,8 @@ async def nologin():
     print(await locator.text_content())
     await expect(locator).to_have_text("Export")
     # /html/body/div[1]/div/div/div[2]/div[2]/div[2]/div/div/div[3]/div[1]/div/div/div[1]/svg
-    await page.locator('div.sc-jMFEJM.eaxCEo > div > div > div.ant-collapse-item.ant-collapse-item-active.ant-collapse-no-arrow > div.ant-collapse-header > div > div > div:nth-child(1) > svg').click()
+    await page.get_by_role("button", name="All Clusters")
+
     counts=await page.get_by_label("View Cluster").count()
     print('coubts',counts)
     for i in range(0,counts):   
