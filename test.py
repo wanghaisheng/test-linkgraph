@@ -31,10 +31,10 @@ async def nologin():
     # /html/body/div[1]/div/div/div[2]/div[2]/div[2]/div/div/div[3]/div[1]/div/div/div[1]/svg
     await page.get_by_role("button", name="All Clusters")
 
-    counts=await page.get_by_label("View Cluster").count()
+    counts=await page.get_by_role("button", name="View Cluster").count()
     print('coubts',counts)
     for i in range(0,counts):   
-        topic=await page.get_by_label("View Cluster").nth(i)
+        topic=await page.get_by_role("button", name="View Cluster").nth(i)
         print(f'i{i}')
         
         await topic.click()
