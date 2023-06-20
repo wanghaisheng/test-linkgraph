@@ -39,8 +39,8 @@ async def main():
 
     url="https://dashboard.linkgraph.com/content/content-planner"
     await page.goto(url)
-    visible = await page.get_by_placeholder("Enter a keyword like "Garden Tools"").is_visible()
-    await page.get_by_placeholder("Enter a keyword like "Garden Tools"").fill(keyword)
+    visible = await page.get_by_placeholder('Enter a keyword like "Garden Tools"').is_visible()
+    await page.get_by_placeholder('Enter a keyword like "Garden Tools"').fill(keyword)
       
     visible = await page.get_by_placeholder("Enter a keyword like "Garden Tools"").is_visible()
     await page.get_by_role("button", name="Generate Keyword Clusters").click()
