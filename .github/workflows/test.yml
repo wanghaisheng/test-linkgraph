@@ -22,12 +22,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Checkout tools repo
-        uses: actions/checkout@v3
-
-#       - name: Run Playwright tests
-#         uses: docker://mcr.microsoft.com/playwright:v1.35.0-jammy          
-#https://github.com/juliangruber/browser-run/issues/147
       - name: Setup xvfb (Linux)
         if: runner.os == 'Linux'
         run: |
