@@ -46,4 +46,4 @@ jobs:
           prerelease: false
           title: '${{ github.run_id }}'
           files: |
-            output/*             
+            ./*             
