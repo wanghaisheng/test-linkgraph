@@ -21,6 +21,7 @@ async def nologin():
     keyword=os.getenv('keyword')
    
     url="https://dashboard.linkgraph.com/content/content-planner/public?keyword="+keyword
+    await page.goto(url)
 
     time.sleep(120)
     
