@@ -25,14 +25,14 @@ jobs:
       - name: Set up Python 3.10
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
-      - name: Ensure browsers are installed
-        run: python -m playwright install --with-deps        
+          python-version: '3.10'   
       - name: Install dependencies
         run: |
           sudo apt-get update      
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+      - name: Ensure browsers are installed
+        run: python -m playwright install --with-deps     
       - name: run demo
         run: |
           env HOME=/root python test.py
