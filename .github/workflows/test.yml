@@ -60,7 +60,9 @@ jobs:
         run: |
           env HOME=/root python test.py
         env:
-            keyword: '${{ github.event.inputs.keyword }}'          
+          keyword: '${{ github.event.inputs.keyword }}'     
+      - name: Debug Checkout
+        run: find .          
       - name: Config git
         run: >
           git config --local user.email "ations@github.com"
