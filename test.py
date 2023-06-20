@@ -16,8 +16,8 @@ async def main():
     password=os.getenv('password')
     keyword=os.getenv('keyword')
 
-    await page.get_by_role('email').fill(username)
-    await page.get_by_role('password').fill(password)
+    await page.get_by_placeholder('email@example.com').fill(username)
+    await page.get_by_placeholder('Password').fill(password)
     await page.get_by_role('Login in').click()
 
     url="https://dashboard.linkgraph.com/content/content-planner"
