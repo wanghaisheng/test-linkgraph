@@ -1,7 +1,19 @@
-name: bot check screenshots
+name: link graph content planner topic 
 on:
   workflow_dispatch:
-
+    inputs:
+      username:
+        description: username
+        type: enviroment
+        required: true
+      password:
+        description: password
+        type: enviroment
+        required: true
+      keyword:
+        description: keyword
+        type: enviroment
+        required: true
 jobs:
   build-ubuntu:
     runs-on: ubuntu-latest
@@ -47,6 +59,11 @@ jobs:
       - name: run demo
         run: |
           env HOME=/root python test.py
+        env:
+          username: '${{ github.event.inputs.username }}'
+          password: '${{ github.event.inputs.password }}'
+          keyword: '${{ github.event.inputs.keyword }}'
+          
       - name: Config git
         run: >
           git config --local user.email "ations@github.com"
