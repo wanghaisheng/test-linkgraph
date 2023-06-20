@@ -24,7 +24,7 @@ async def nologin():
 
     time.sleep(120)
     
-    locator = page.locator('#__next > div > div:nth-child(2) > div:nth-child(2) > div.sc-eZEUqN.rdECQ > div.ant-row.ant-row-no-wrap.ant-row-space-between > div:nth-child(2) > div:nth-child(1) > button.ant-btn.ant-btn-default.sc-bczRLJ.gtzvtM')
+    locator = page.locator('#__next > div > div > div:nth-child(2) > div.sc-eZEUqN.rdECQ > div.ant-row.ant-row-no-wrap.ant-row-space-between > div:nth-child(2) > div:nth-child(1) > button:nth-child(2)')
     await expect(locator).to_contain_text("Export")
 
     topic=await page.get_by_label("View Cluster").nth(i)
