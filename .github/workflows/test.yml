@@ -57,16 +57,16 @@ jobs:
           keyword: '${{ github.event.inputs.keyword }}'     
       - name: Debug Checkout
         run: find .          
-      - name: Config git
-        run: >
-          git config --local user.email "ations@github.com"
+#       - name: Config git
+#         run: >
+#           git config --local user.email "ations@github.com"
 
-          git config --local user.name "github"
+#           git config --local user.name "github"
 
-          git config --global http.postBuffer 157286400
+#           git config --global http.postBuffer 157286400
 
-          git remote set-url origin "https://${{ github.actor }}:${{
-          github.token }}@github.com/${{ github.repository }}"
+#           git remote set-url origin "https://${{ github.actor }}:${{
+#           github.token }}@github.com/${{ github.repository }}"
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
