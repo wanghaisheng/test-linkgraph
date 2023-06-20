@@ -23,10 +23,32 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
-      - name: Download ffmpeg for Linux
+      - name: Setup xvfb (Linux)
+        if: runner.os == 'Linux'
         run: |
-          sudo apt update
-          sudo apt install ffmpeg
+          apt-get update     
+          apt-get install -y xvfb libxkbcommon-x11-0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-xinerama0 libxcb-xinput0 libxcb-xfixes0
+          # start xvfb in the background
+          /usr/bin/Xvfb $DISPLAY -screen 0 1280x1024x24 &
+      - name: Install dependencies
+# https://stackoverflow.com/questions/63592708/error-no-display-environment-variable-specified
+      #          apt-get install xvfb
+ #         touch ~/.Xauthority
+  #        xauth generate :0 . trusted
+   #       xauth add ${HOST}:0 . $(xxd -l 16 -p /dev/urandom)
+    #      xauth list
+     #     export DISPLAY=:0        
+        run: |
+          apt-get update     
+          export DISPLAY=localhost:0.0
+          export MOZ_HEADLESS=1    
+          ls -al
+          cd tiktoka-studio-uploader 
+          python -m pip install --upgrade pip
+          pip install httpx numpy
+          pip install -r  requirements.txt 
+      - name: Ensure browsers are installed
+        run: python -m playwright install --with-deps        
       - name: Install dependencies
         run: |
           sudo apt-get update      
