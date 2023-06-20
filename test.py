@@ -32,31 +32,33 @@ async def nologin():
     await page.get_by_role("button", name="All Clusters").click()
 
     counts=await page.get_by_role("button", name="View Cluster").count()
-    counts= await page.locator("div.sc-jMFEJM.eaxCEo > div > div > div.ant-collapse-item.ant-collapse-item-active.ant-collapse-no-arrow > div.ant-collapse-content.ant-collapse-content-active > div > div > div").count()
-    print('coubts',counts)
-    for i in range(0,counts):   
-        topic=await page.get_by_role("button", name="View Cluster").nth(i)
-        print(f'i{i}')
+    await page.screenshot()
+
+    # counts= await page.locator("div.sc-jMFEJM.eaxCEo > div > div > div.ant-collapse-item.ant-collapse-item-active.ant-collapse-no-arrow > div.ant-collapse-content.ant-collapse-content-active > div > div > div").count()
+    # print('coubts',counts)
+    # for i in range(0,counts):   
+    #     topic=await page.get_by_role("button", name="View Cluster").nth(i)
+    #     print(f'i{i}')
         
-        await topic.click()
-        MONTHLY_SEARCH_VOLUME=await page.locator("div.sc-jNxMLV:nth-child(1)").text_content()
-        TOTAL_TRAFFIC=await page.locator("div.sc-jNxMLV:nth-child(2)").text_content()
-        RANKING_POTENTIAL=await page.locator("div.sc-jNxMLV:nth-child(3)").text_content()
-        row_counts=await page.locator("tr.ant-table-row:nth-child").count()
-        print(f'MONTHLY_SEARCH_VOLUME{MONTHLY_SEARCH_VOLUME}')
-        print(f'TOTAL_TRAFFIC-{TOTAL_TRAFFIC}')
-        print(f'RANKING_POTENTIAL-{RANKING_POTENTIAL}')
-        print(f'row_counts-{row_counts}')
+    #     await topic.click()
+    #     MONTHLY_SEARCH_VOLUME=await page.locator("div.sc-jNxMLV:nth-child(1)").text_content()
+    #     TOTAL_TRAFFIC=await page.locator("div.sc-jNxMLV:nth-child(2)").text_content()
+    #     RANKING_POTENTIAL=await page.locator("div.sc-jNxMLV:nth-child(3)").text_content()
+    #     row_counts=await page.locator("tr.ant-table-row:nth-child").count()
+    #     print(f'MONTHLY_SEARCH_VOLUME{MONTHLY_SEARCH_VOLUME}')
+    #     print(f'TOTAL_TRAFFIC-{TOTAL_TRAFFIC}')
+    #     print(f'RANKING_POTENTIAL-{RANKING_POTENTIAL}')
+    #     print(f'row_counts-{row_counts}')
 
-        for i in range(0,row_counts):
-          KEYWORDS_IN_CLUSTER =await page.locator("td.ant-table-cell").nth(1)
-          MSV =await page.locator("td.ant-table-cell").nth(2)
-          CPC =await page.locator("td.ant-table-cell").nth(3)
-          print(f'KEYWORDS_IN_CLUSTER-{KEYWORDS_IN_CLUSTER}')
-          print(f'MSV-{MSV}')
-          print(f'CPC-{CPC}')
+    #     for i in range(0,row_counts):
+    #       KEYWORDS_IN_CLUSTER =await page.locator("td.ant-table-cell").nth(1)
+    #       MSV =await page.locator("td.ant-table-cell").nth(2)
+    #       CPC =await page.locator("td.ant-table-cell").nth(3)
+    #       print(f'KEYWORDS_IN_CLUSTER-{KEYWORDS_IN_CLUSTER}')
+    #       print(f'MSV-{MSV}')
+    #       print(f'CPC-{CPC}')
 
-          # Continue by using the Page
+    #       # Continue by using the Page
     await botright_client.close()
 
 async def main():
