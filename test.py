@@ -23,7 +23,7 @@ async def nologin():
     url="https://dashboard.linkgraph.com/content/content-planner/public?keyword="+keyword
     await page.goto(url)
 
-    time.sleep(120)
+    time.sleep(500)
     locator = page.locator('//html/body/div[1]/div/div/div[2]/div[2]/div[2]/div/div/div[3]/div[1]/div/div/div[1]/svg')
     await expect(locator).to_have_text("All Clusters")
     # 
