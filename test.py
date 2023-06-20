@@ -18,7 +18,7 @@ async def main():
 
     await page.get_by_placeholder('email@example.com').fill(username)
     await page.get_by_placeholder('Password').fill(password)
-    await page.get_by_role('Login in').click()
+    await page.locator('.ant-form > div:nth-child(7)').click()
 
     url="https://dashboard.linkgraph.com/content/content-planner"
     await page.goto(url)
