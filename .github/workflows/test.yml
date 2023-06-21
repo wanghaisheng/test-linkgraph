@@ -43,8 +43,6 @@ jobs:
           ref='${{ github.ref }}'
           tag=$(echo $ref | perl -e "print pop @{[split '/', <>]}")
 
-          mkdir -p $tag/
-          cp -r ./* $tag/
           cd $tag
           zip -r ../package.zip *
       - name: upload archive
