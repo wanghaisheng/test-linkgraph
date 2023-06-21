@@ -30,16 +30,6 @@ jobs:
           env HOME=/root python test.py
         env:
           keyword: '${{ github.event.inputs.keyword }}'
-      - name: Config git
-        run: >
-          git config --local user.email "ations@github.com"
-
-          git config --local user.name "github"
-
-          git config --global http.postBuffer 157286400
-
-          git remote set-url origin "https://${{ github.actor }}:${{
-          github.token }}@github.com/${{ github.repository }}"
       - name: Release
         uses: marvinpinto/action-automatic-releases@latest
         with:
