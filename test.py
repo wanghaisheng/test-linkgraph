@@ -23,12 +23,16 @@ async def nologin():
     url="https://dashboard.linkgraph.com/content/content-planner/public?keyword="+keyword
     await page.goto(url)
 
-    time.sleep(500)
-    # topicfound='.ant-row.ant-row-no-wrap.ant-row-space-between'
+    topicfound='div.sc-eZEUqN.rdECQ > div.ant-row.ant-row-no-wrap.ant-row-space-between'
         
-    # topicfoundlocator = page.locator(topicfound)
-    # await expect(topicfoundlocator).to_contain_text("topic ideas found for")
-    # print('topic found')
+    topicfoundlocator = page.locator(topicfound)
+    while:
+        preparing=await expect(topicfoundlocator).to_contain_text("Creating clusters takes up to 2 minutes")
+        time.sleep(30)
+    
+    result=await expect(topicfoundlocator).to_contain_text("topic ideas found for")
+    if result:
+        print('topic found')
     # locator = page.locator('div.sc-jMFEJM.eaxCEo > div > div > div:nth-child(3)')
     # await expect(locator).to_have_text("All Clusters")
     # # 
