@@ -29,33 +29,31 @@ async def nologin():
     
     topic_found_locator = page.locator(topic_found)
     
+    # while True:
+    #     print('didi:',await topic_found_locator.text_content())
+    #     preparing = await expect(topic_found_locator).to_contain_text("Creating clusters takes up to 2 minutes")
+    #     print('still prepraring,wait another 30s')
+    #     time.sleep(30)
     while True:
         print('didi:',await topic_found_locator.text_content())
-        preparing = await expect(topic_found_locator).to_contain_text("Creating clusters takes up to 2 minutes")
+        preparing = await expect(topic_found_locator).to_contain_text("topic ideas found for")
         print('still prepraring,wait another 30s')
         time.sleep(30)
-
-    result = await expect(topic_found_locator).to_contain_text("topic ideas found for")
-    if result:
-        print('topic found')
 
     os.makedirs(".output", exist_ok=True)
     await page.screenshot(path="./output/1.png", full_page=True)
     
-    result=await expect(topicfoundlocator).to_contain_text("topic ideas found for")
-    if result:
-        print('topic found')
-    # locator = page.locator('div.sc-jMFEJM.eaxCEo > div > div > div:nth-child(3)')
-    # await expect(locator).to_have_text("All Clusters")
-    # # 
-    # # await page.get_by_role("button", name="All Clusters").click()
+    locator = page.locator('div.sc-jMFEJM.eaxCEo > div > div > div:nth-child(3)')
+    await expect(locator).to_have_text("All Clusters")
+    # 
+    # await page.get_by_role("button", name="All Clusters").click()
 
-    # # counts=await page.get_by_role("button", name="View Cluster").count()
+    # counts=await page.get_by_role("button", name="View Cluster").count()
     os.mkdir(".output")
     await page.screenshot(path="./output/1.png", full_page=True)
  
-    # counts= await page.locator("div.sc-jMFEJM.eaxCEo > div > div > div.ant-collapse-item.ant-collapse-item-active.ant-collapse-no-arrow > div.ant-collapse-content.ant-collapse-content-active > div > div > div").count()
-    # print('coubts',counts)
+    counts= await page.locator("div.sc-jMFEJM.eaxCEo > div > div > div.ant-collapse-item.ant-collapse-item-active.ant-collapse-no-arrow > div.ant-collapse-content.ant-collapse-content-active > div > div > div").count()
+    print('coubts',counts)
     # for i in range(0,counts):   
     #     topic=await page.get_by_role("button", name="View Cluster").nth(i)
     #     print(f'i{i}')
