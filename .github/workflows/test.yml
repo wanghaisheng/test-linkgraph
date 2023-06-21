@@ -42,8 +42,6 @@ jobs:
         run: |
           ref='${{ github.ref }}'
           tag=$(echo $ref | perl -e "print pop @{[split '/', <>]}")
-
-          cd $tag
           zip -r ../package.zip *
       - name: upload archive
         uses: actions/upload-artifact@v1
