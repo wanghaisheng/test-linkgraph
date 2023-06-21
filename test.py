@@ -19,9 +19,11 @@ async def nologin():
     # await await page.get_by_role('keyword').fill(keyword)
     # await await page.locator('.display-flex > button:nth-child(2)').click()
     topic_found = '.ant-row.ant-row-no-wrap.ant-row-space-between'
+    
     topic_found_locator = page.locator(topic_found)
-
+    
     while True:
+        print('didi:',await topic_found_locator.text_content())
         preparing = await expect(topic_found_locator).to_contain_text("Creating clusters takes up to 2 minutes")
         print('still prepraring,wait another 30s')
         time.sleep(30)
