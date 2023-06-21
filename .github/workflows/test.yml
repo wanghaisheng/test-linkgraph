@@ -68,6 +68,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ../package.zip
+          asset_path: ./package.zip
           asset_name: package.zip
           asset_content_type: application/zip     
