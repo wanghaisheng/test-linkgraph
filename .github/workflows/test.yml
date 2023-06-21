@@ -44,6 +44,7 @@ jobs:
           tag=$(echo $ref | perl -e "print pop @{[split '/', <>]}")
           apt-get install -y zip          
           zip -r package.zip ./output
+          pwd
           ls .
       - name: upload archive
         uses: actions/upload-artifact@v1
