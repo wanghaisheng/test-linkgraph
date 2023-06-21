@@ -21,7 +21,7 @@ async def nologin():
     result = await topic_found_locator.text_content()
     print('didi:', result)
     done=False
-    while done==True:
+    while done==False:
         if "Creating clusters takes up to 2 minutes" in result:
             print('Still preparing, waiting another 30 seconds')
             time.sleep(30)
@@ -37,7 +37,7 @@ async def nologin():
     clusters_locator = page.locator('div.sc-jMFEJM.eaxCEo > div > div > div:nth-child(3)')
     done=False
 
-    while done==True:
+    while done==False:
         result = await clusters_locator.text_content()
         print('didi:', result)
 
