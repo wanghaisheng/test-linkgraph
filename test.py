@@ -34,11 +34,16 @@ async def nologin():
     #     preparing = await expect(topic_found_locator).to_contain_text("Creating clusters takes up to 2 minutes")
     #     print('still prepraring,wait another 30s')
     #     time.sleep(30)
+    result =await topic_found_locator.text_content()   
     while True:
         print('didi:',await topic_found_locator.text_content())
-        preparing = await expect(topic_found_locator).to_contain_text("topic ideas found for")
-        print('still prepraring,wait another 30s')
-        time.sleep(30)
+        if "Creating clusters takes up to 2 minutes" in result:
+            print('still prepraring,wait another 30s')
+            time.sleep(30)
+        elif "topic ideas found for" in result:
+            print('cluster is prepared')
+            
+            break
 
     os.makedirs(".output", exist_ok=True)
     await page.screenshot(path="./output/1.png", full_page=True)
