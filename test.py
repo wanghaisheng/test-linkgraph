@@ -24,7 +24,12 @@ async def nologin():
     await page.goto(url)
 
     time.sleep(500)
-    locator = page.locator('//html/body/div[1]/div/div/div[2]/div[2]/div[2]/div/div/div[3]/div[1]/div/div/div[1]/svg')
+    topicfound='div.sc-eZEUqN.rdECQ > div.ant-row.ant-row-no-wrap.ant-row-space-between'
+        
+    topicfoundlocator = page.locator(topicfound)
+    await expect(topicfoundlocator).to_contain_text("topic ideas found for")
+    print('topic found')
+    locator = page.locator('div.sc-jMFEJM.eaxCEo > div > div > div:nth-child(3)')
     await expect(locator).to_have_text("All Clusters")
     # 
     # await page.get_by_role("button", name="All Clusters").click()
