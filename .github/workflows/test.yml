@@ -43,7 +43,7 @@ jobs:
           ref='${{ github.ref }}'
           tag=$(echo $ref | perl -e "print pop @{[split '/', <>]}")
           apt-get install zip          
-          zip -r ../package.zip *
+          zip -r ../package.zip ./output
       - name: upload archive
         uses: actions/upload-artifact@v1
         with:
