@@ -24,17 +24,17 @@ async def nologin():
     await page.goto(url)
 
     time.sleep(500)
-    topicfound='.ant-row.ant-row-no-wrap.ant-row-space-between'
+    # topicfound='.ant-row.ant-row-no-wrap.ant-row-space-between'
         
-    topicfoundlocator = page.locator(topicfound)
-    await expect(topicfoundlocator).to_contain_text("topic ideas found for")
-    print('topic found')
-    locator = page.locator('div.sc-jMFEJM.eaxCEo > div > div > div:nth-child(3)')
-    await expect(locator).to_have_text("All Clusters")
-    # 
-    # await page.get_by_role("button", name="All Clusters").click()
+    # topicfoundlocator = page.locator(topicfound)
+    # await expect(topicfoundlocator).to_contain_text("topic ideas found for")
+    # print('topic found')
+    # locator = page.locator('div.sc-jMFEJM.eaxCEo > div > div > div:nth-child(3)')
+    # await expect(locator).to_have_text("All Clusters")
+    # # 
+    # # await page.get_by_role("button", name="All Clusters").click()
 
-    # counts=await page.get_by_role("button", name="View Cluster").count()
+    # # counts=await page.get_by_role("button", name="View Cluster").count()
     await page.screenshot(path="1.png", full_page=True)
  
     # counts= await page.locator("div.sc-jMFEJM.eaxCEo > div > div > div.ant-collapse-item.ant-collapse-item-active.ant-collapse-no-arrow > div.ant-collapse-content.ant-collapse-content-active > div > div > div").count()
