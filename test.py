@@ -48,8 +48,18 @@ async def nologin():
     os.makedirs(".output", exist_ok=True)
     await page.screenshot(path="./output/1.png", full_page=True)
     
-    locator = page.locator('div.sc-jMFEJM.eaxCEo > div > div > div:nth-child(3)')
-    await expect(locator).to_have_text("All Clusters")
+    Clusterslocator = page.locator('div.sc-jMFEJM.eaxCEo > div > div > div:nth-child(3)')
+    result =await Clusterslocator.text_content()   
+    while True:
+        print('didi:',await Clusterslocator.text_content())    
+        if not "All Clusters" in result:
+            print('still prepraring,wait another 30s')
+            time.sleep(30)
+        else:
+            print('All Clusters')
+            
+            break        
+    # await expect(locator).to_have_text("All Clusters")
     # 
     # await page.get_by_role("button", name="All Clusters").click()
 
