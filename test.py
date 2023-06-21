@@ -18,7 +18,7 @@ async def nologin():
     # visible = await page.get_by_role('keyword').is_visible()
     # await await page.get_by_role('keyword').fill(keyword)
     # await await page.locator('.display-flex > button:nth-child(2)').click()
-    topic_found = 'div.sc-eZEUqN.rdECQ > div.ant-row.ant-row-no-wrap.ant-row-space-between'
+    topic_found = '.ant-row.ant-row-no-wrap.ant-row-space-between'
     topic_found_locator = page.locator(topic_found)
 
     while True:
