@@ -24,7 +24,7 @@ async def nologin():
     await page.goto(url)
 
     time.sleep(500)
-    topicfound='div.sc-eZEUqN.rdECQ > div.ant-row.ant-row-no-wrap.ant-row-space-between'
+    topicfound='.ant-row.ant-row-no-wrap.ant-row-space-between'
         
     topicfoundlocator = page.locator(topicfound)
     await expect(topicfoundlocator).to_contain_text("topic ideas found for")
