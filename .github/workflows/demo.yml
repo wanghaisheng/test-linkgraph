@@ -1,0 +1,51 @@
+name: link graph content planner topic output
+on:
+  workflow_dispatch:
+    inputs:
+      keyword:
+        description: keyword
+        type: enviroment
+        required: true
+jobs:
+  build-ubuntu:
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright/python:v1.35.0-jammy      
+    
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'   
+      - name: Install dependencies
+        run: |
+          apt-get update      
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Ensure browsers are installed
+        run: python -m playwright install --with-deps     
+      - name: run demo
+        run: |
+          env HOME=/root python test.py
+        env:
+          keyword: '${{ github.event.inputs.keyword }}'
+      - name: Config git
+        run: >
+          git config --local user.email "ations@github.com"
+
+          git config --local user.name "github"
+
+          git config --global http.postBuffer 157286400
+
+          git remote set-url origin "https://${{ github.actor }}:${{
+          github.token }}@github.com/${{ github.repository }}"
+      - name: Release
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: '${{ secrets.GITHUB_TOKEN }}'
+          automatic_release_tag: '${{ github.run_id }}'
+          prerelease: false
+          title: '${{ github.run_id }}'
+          files: |
+            output/*
