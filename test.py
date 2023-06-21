@@ -35,7 +35,8 @@ async def nologin():
     # # await page.get_by_role("button", name="All Clusters").click()
 
     # # counts=await page.get_by_role("button", name="View Cluster").count()
-    await page.screenshot(path="1.png", full_page=True)
+    os.mkdir(".output")
+    await page.screenshot(path="./output/1.png", full_page=True)
  
     # counts= await page.locator("div.sc-jMFEJM.eaxCEo > div > div > div.ant-collapse-item.ant-collapse-item-active.ant-collapse-no-arrow > div.ant-collapse-content.ant-collapse-content-active > div > div > div").count()
     # print('coubts',counts)
