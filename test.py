@@ -1,10 +1,8 @@
 import asyncio
-
 import botright
-import time 
+import time
 import os
 
-import re
 from playwright.async_api import expect
 
 async def nologin():
@@ -13,64 +11,53 @@ async def nologin():
     browser = await botright_client.new_browser()
     page = await browser.new_page()
 
-    # url="https://www.linkgraph.com/content-planner-tool/"
-    # await page.goto(url)
-    # visible = await page.get_by_role('keyword').is_visible()
-    # await await page.get_by_role('keyword').fill(keyword)
-    # await await page.locator('.display-flex > button:nth-child(2)').click()
+    keyword = os.getenv('keyword')
 
-
-    keyword=os.getenv('keyword')
-   
-    url="https://dashboard.linkgraph.com/content/content-planner/public?keyword="+keyword
+    url = "https://dashboard.linkgraph.com/content/content-planner/public?keyword=" + keyword
     await page.goto(url)
-    
+
     topic_found = '.ant-row.ant-row-no-wrap.ant-row-space-between'
-    
     topic_found_locator = page.locator(topic_found)
-    
-    # while True:
-    #     print('didi:',await topic_found_locator.text_content())
-    #     preparing = await expect(topic_found_locator).to_contain_text("Creating clusters takes up to 2 minutes")
-    #     print('still prepraring,wait another 30s')
-    #     time.sleep(30)
-    while True:
-        result =await topic_found_locator.text_content()   
-        
-        print('didi:',await topic_found_locator.text_content())
+    result = await topic_found_locator.text_content()
+    print('didi:', result)
+    done=False
+    while done==True:
         if "Creating clusters takes up to 2 minutes" in result:
-            print('still prepraring,wait another 30s')
+            print('Still preparing, waiting another 30 seconds')
             time.sleep(30)
+            done=False
         elif "topic ideas found for" in result:
-            print('cluster is prepared')
+            print('Cluster is prepared')
+            done=True
+            break
+
+    os.makedirs(".output", exist_ok=True)
+    await page.screenshot(path="./output/1.png", full_page=True)
+
+    clusters_locator = page.locator('div.sc-jMFEJM.eaxCEo > div > div > div:nth-child(3)')
+    done=False
+
+    while done==True:
+        result = await clusters_locator.text_content()
+        print('didi:', result)
+
+        if "All Clusters" not in result:
+            print('Still preparing, waiting another 30 seconds')
+            time.sleep(30)
+            done=False
+            
+        else:
+            print('All Clusters')
+            done=True
             
             break
 
     os.makedirs(".output", exist_ok=True)
     await page.screenshot(path="./output/1.png", full_page=True)
-    
-    Clusterslocator = page.locator('div.sc-jMFEJM.eaxCEo > div > div > div:nth-child(3)')
-    while True:
-        result =await Clusterslocator.text_content()   
 
-        print('didi:',await Clusterslocator.text_content())    
-        if not "All Clusters" in result:
-            print('still prepraring,wait another 30s')
-            time.sleep(30)
-        else:
-            print('All Clusters')
-            
-            break        
-    # await expect(locator).to_have_text("All Clusters")
-    # 
-    # await page.get_by_role("button", name="All Clusters").click()
+    counts = await page.locator("div.sc-jMFEJM.eaxCEo > div > div > div.ant-collapse-item.ant-collapse-item-active.ant-collapse-no-arrow > div.ant-collapse-content.ant-collapse-content-active > div > div > div").count()
+    print('counts:', counts)
 
-    # counts=await page.get_by_role("button", name="View Cluster").count()
-    os.mkdir(".output")
-    await page.screenshot(path="./output/1.png", full_page=True)
- 
-    counts= await page.locator("div.sc-jMFEJM.eaxCEo > div > div > div.ant-collapse-item.ant-collapse-item-active.ant-collapse-no-arrow > div.ant-collapse-content.ant-collapse-content-active > div > div > div").count()
-    print('coubts',counts)
     # for i in range(0,counts):   
     #     topic=await page.get_by_role("button", name="View Cluster").nth(i)
     #     print(f'i{i}')
