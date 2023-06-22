@@ -31,10 +31,10 @@ async def nologin():
             print('Cluster is prepared')
             done=True
             break
-    print('URL:',page.url)
+    # print('URL:',page.url)
     try:
         clusters_locator = page.locator('div.sc-jMFEJM.eaxCEo > div > div > div:nth-child(3) > div > div > div > div:nth-child(1) > svg')
-        if clusters_locator.is_visible():
+        if await clusters_locator.is_visible():
             print(await clusters_locator.text_content())
             await clusters_locator.click()
         else:
