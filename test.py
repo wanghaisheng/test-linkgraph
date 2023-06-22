@@ -1,5 +1,5 @@
 import asyncio
-# import botright
+import botright
 import time
 import os
 
@@ -7,9 +7,12 @@ from playwright.async_api import expect,async_playwright
 
 async def nologin():
     async with async_playwright() as playwright:
-        # botright_client = await botright.Botright(headless=True)
+        botright_client = await botright.Botright(headless=True)
     
-        browser =  await playwright.chromium.launch()
+        # browser =  await playwright.chromium.launch()
+
+        browser = await botright_client.new_browser()
+        
         page = await browser.new_page()
     
         keyword = os.getenv('keyword')
@@ -72,8 +75,8 @@ async def nologin():
         #       print(f'CPC-{CPC}')
     
         #       # Continue by using the Page
-        # await botright_client.close()
-        await browser.close()
+        await botright_client.close()
+        # await browser.close()
 
 async def main():
     botright_client = await botright.Botright(headless=True)
