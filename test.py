@@ -26,17 +26,18 @@ async def nologin():
             print('URL:',page.url)
 
             print('ooooo:', result.find("Creating clusters takes up to 2 minutes") != -1  )
-            print('Still preparing, waiting another 30 seconds')
+            print('Still preparing, waiting another 10 seconds')
             time.sleep(10)
         print('didi:', result)
-    
+        print('URL:',page.url)
+
         try:
-            clusters_locator = page.locator('div.sc-jMFEJM.eaxCEo > div > div > div:nth-child(3) > div > div > div > div:nth-child(1) > svg')
+            clusters_locator = page.locator('//html/body/div[1]/div/div[2]/div[2]/div[2]/div[2]/div/div/div[3]/div/div/div/div[1]/svg')
             if await clusters_locator.is_visible():
                 print(await clusters_locator.text_content())
                 await clusters_locator.click()
             else:
-                print('xpath is failed')
+                print('is_visible is failed')
         except:
             print('xpath is failed')
     
@@ -69,7 +70,8 @@ async def nologin():
         #       print(f'CPC-{CPC}')
     
         #       # Continue by using the Page
-        await botright_client.close()
+        # await botright_client.close()
+        await browser.close()
 
 async def main():
     botright_client = await botright.Botright(headless=True)
