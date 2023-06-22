@@ -24,13 +24,14 @@ async def nologin():
         topic_found_locator = page.locator(topic_found)
     
         while True:
-            result = not "Creating clusters takes up to 2 minutes" in await topic_found_locator.text_content()
-        
+            txt = await topic_found_locator.text_content()
+            result = not "Creating clusters takes up to 2 minutes" in txt
+           
             if result:     
                 print('11111:', result)
                 print('URL:',page.url)
                 break
-            print('ooooo:', await topic_found_locator.text_content().find("Creating clusters takes up to 2 minutes") != -1  )
+            print('ooooo:', txt.find("Creating clusters takes up to 2 minutes") != -1  )
             print('Still preparing, waiting another 10 seconds')
             time.sleep(10)
         print('didi:', result)
