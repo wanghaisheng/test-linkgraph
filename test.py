@@ -7,10 +7,9 @@ from playwright.async_api import expect,async_playwright
 
 async def nologin():
     async with async_playwright() as playwright:
-        botright_client = await playwright.chromium.launch()
         # botright_client = await botright.Botright(headless=True)
     
-        browser = await botright_client.new_browser()
+        browser =  await playwright.chromium.launch()
         page = await browser.new_page()
     
         keyword = os.getenv('keyword')
