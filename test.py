@@ -31,7 +31,7 @@ async def nologin():
         # await page.locator('.display-flex > button:nth-child(2)').click()
         url = "https://dashboard.linkgraph.com/content/content-planner/public?keyword=" + keyword
         response =await page.goto(url)
-        await page.wait_for_navigation()
+        await page.wait_for_url("https://dashboard.linkgraph.com/content/content-planner/public/")
 
         while True:
             redirect= 'public_hash' in response.url    
