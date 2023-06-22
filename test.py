@@ -9,7 +9,7 @@ STATUS_CONTAINER='.ant-row.ant-row-no-wrap.ant-row-space-between'
 processing="Creating clusters takes up to 2 minutes"
 finished="topic found for"
 
-async def not_finished(self, page) -> bool:
+async def not_finished(page) -> bool:
     s = await page.locator(STATUS_CONTAINER).text_content()
     return s.find(finished) != -1
 async def nologin():
@@ -28,7 +28,7 @@ async def nologin():
         await page.goto(url)
     
     
-        while await self.not_finished(page):
+        while await not_finished(page):
             print('Still preparing, waiting another 10 seconds')
             time.sleep(10)
         print('URL:',page.url)
