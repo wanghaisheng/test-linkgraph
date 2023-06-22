@@ -19,12 +19,14 @@ async def nologin():
     
         topic_found = '.ant-row.ant-row-no-wrap.ant-row-space-between'
         topic_found_locator = page.locator(topic_found)
-        result = await topic_found_locator.text_content()
     
-        while "Creating clusters takes up to 2 minutes" in await topic_found_locator.text_content():
-            print('ooooo:', result)
-            print('URL:',page.url)
-
+        while True:
+            result = not "Creating clusters takes up to 2 minutes" in await topic_found_locator.text_content()
+        
+            if result:     
+                print('11111:', result)
+                print('URL:',page.url)
+                break
             print('ooooo:', result.find("Creating clusters takes up to 2 minutes") != -1  )
             print('Still preparing, waiting another 10 seconds')
             time.sleep(10)
