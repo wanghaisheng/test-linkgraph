@@ -11,7 +11,7 @@ finished="topic found for"
 
 async def not_finished(page) -> bool:
     s = await page.locator(STATUS_CONTAINER).text_content()
-    print(s)
+    print('current text:',s)
     return s.find(processing) != -1
 async def nologin():
     async with async_playwright() as playwright:
