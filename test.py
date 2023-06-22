@@ -33,19 +33,9 @@ async def nologin():
         response =await page.goto(url)
         await page.wait_for_url("https://dashboard.linkgraph.com/content/content-planner/public/**")
 
-        while True:
-            redirect= 'public_hash' in response.url    
-            print('URL:',response.url)
-            
-            if redirect:
-                await page.goto(response.url   )
 
-                break
-            time.sleep(5)
-            await page.reload()
-        resulturl=page.url  
         while True: 
-            await page.goto(resulturl)            
+            # await page.goto(resulturl)            
             done=await not_finished(page)
             if done:
                 break
