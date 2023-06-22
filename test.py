@@ -31,27 +31,10 @@ async def nologin():
             print('Cluster is prepared')
             done=True
             break
+    print('URL:',page.url)
 
-    os.makedirs(".output", exist_ok=True)
-    await page.screenshot(path="./output/1.png", full_page=True)
-
-    clusters_locator = page.locator('div.sc-jMFEJM.eaxCEo > div > div > div:nth-child(3)')
-    done=False
-
-    while done==False:
-        result = await clusters_locator.text_content()
-        print('didi:', result)
-        notdone=    "All Clusters" not in result
-        if notdone:
-            print('Still preparing, waiting another 30 seconds')
-            time.sleep(30)
-            done=False
-            
-        else:
-            print('All Clusters')
-            done=True
-            
-            break
+    clusters_locator = page.locator('div.sc-jMFEJM.eaxCEo > div > div > div:nth-child(3) > div > div > div > div:nth-child(1) > svg')
+    await clusters_locator.click()
 
     os.makedirs(".output", exist_ok=True)
     await page.screenshot(path="./output/1.png", full_page=True)
