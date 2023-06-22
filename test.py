@@ -23,7 +23,7 @@ async def nologin():
         
         page = await browser.new_page()
     
-        # keyword = os.getenv('keyword')
+        keyword = os.getenv('keyword')
         # url="https://www.linkgraph.com/content-planner-tool/"
         # await page.goto(url)
         # visible = await page.get_by_role('keyword').is_visible()
