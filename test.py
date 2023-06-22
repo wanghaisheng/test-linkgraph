@@ -22,11 +22,12 @@ async def nologin():
     print('didi:', result)
     done=False
     while done==False:
-        if "Creating clusters takes up to 2 minutes" in result:
+        notdone="Creating clusters takes up to 2 minutes" in result
+        if notdone:
             print('Still preparing, waiting another 30 seconds')
             time.sleep(30)
             done=False
-        elif "topic ideas found for" in result:
+        else:
             print('Cluster is prepared')
             done=True
             break
@@ -40,8 +41,8 @@ async def nologin():
     while done==False:
         result = await clusters_locator.text_content()
         print('didi:', result)
-
-        if "All Clusters" not in result:
+        notdone=    "All Clusters" not in result
+        if notdone:
             print('Still preparing, waiting another 30 seconds')
             time.sleep(30)
             done=False
