@@ -29,7 +29,9 @@ async def nologin():
         await page.goto(url)
     
         while True:
-            redirect= 'public_hash' in page.url            
+            redirect= 'public_hash' in page.url    
+            print('URL:',page.url)
+            
             if redirect:
                 await page.goto(page.url   )
 
@@ -39,7 +41,6 @@ async def nologin():
         while True: 
             await page.goto(resulturl)            
             done=await not_finished(page)
-            print('URL:',page.url)
             if done:
                 break
             
