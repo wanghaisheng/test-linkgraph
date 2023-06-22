@@ -30,6 +30,8 @@ async def nologin():
     
     
         while await not_finished(page):
+            print('URL:',page.url)
+            
             print('Still preparing, waiting another 10 seconds')
             time.sleep(10)
         print('URL:',page.url)
