@@ -32,9 +32,15 @@ async def nologin():
             done=True
             break
     print('URL:',page.url)
-
-    clusters_locator = page.locator('div.sc-jMFEJM.eaxCEo > div > div > div:nth-child(3) > div > div > div > div:nth-child(1) > svg')
-    await clusters_locator.click()
+    try:
+        clusters_locator = page.locator('div.sc-jMFEJM.eaxCEo > div > div > div:nth-child(3) > div > div > div > div:nth-child(1) > svg')
+        if clusters_locator.is_visible():
+            print(await clusters_locator.text_content())
+            await clusters_locator.click()
+        else:
+            print('xpath is failed')
+    except:
+        print('xpath is failed')
 
     os.makedirs(".output", exist_ok=True)
     await page.screenshot(path="./output/1.png", full_page=True)
