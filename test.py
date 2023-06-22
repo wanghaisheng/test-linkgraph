@@ -21,12 +21,13 @@ async def nologin():
     result = await topic_found_locator.text_content()
 
     while "Creating clusters takes up to 2 minutes" in result:
-        print('didi:', result)
-        print('didi:', result.find("Creating clusters takes up to 2 minutes") != -1  )
+        print('ooooo:', result)
+        print('ooooo:', result.find("Creating clusters takes up to 2 minutes") != -1  )
         print('Still preparing, waiting another 30 seconds')
         time.sleep(10)
+    print('didi:', result)
 
-    # print('URL:',page.url)
+    print('URL:',page.url)
     try:
         clusters_locator = page.locator('div.sc-jMFEJM.eaxCEo > div > div > div:nth-child(3) > div > div > div > div:nth-child(1) > svg')
         if await clusters_locator.is_visible():
