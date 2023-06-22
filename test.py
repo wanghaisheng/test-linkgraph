@@ -5,6 +5,13 @@ import os
 
 from playwright.async_api import expect,async_playwright
 
+STATUS_CONTAINER='.ant-row.ant-row-no-wrap.ant-row-space-between'
+processing="Creating clusters takes up to 2 minutes"
+finished="topic found for"
+
+async def not_finished(self, page) -> bool:
+    s = await page.locator(STATUS_CONTAINER).text_content()
+    return s.find(finished) != -1
 async def nologin():
     async with async_playwright() as playwright:
         botright_client = await botright.Botright(headless=True)
@@ -20,21 +27,10 @@ async def nologin():
         url = "https://dashboard.linkgraph.com/content/content-planner/public?keyword=" + keyword
         await page.goto(url)
     
-        topic_found = '.ant-row.ant-row-no-wrap.ant-row-space-between'
-        topic_found_locator = page.locator(topic_found)
     
-        while True:
-            txt = await topic_found_locator.text_content()
-            result = not "Creating clusters takes up to 2 minutes" in txt
-           
-            if result:     
-                print('11111:', result)
-                print('URL:',page.url)
-                break
-            print('ooooo:', txt.find("Creating clusters takes up to 2 minutes") != -1  )
+        while await self.not_finished(page):
             print('Still preparing, waiting another 10 seconds')
             time.sleep(10)
-        print('didi:', result)
         print('URL:',page.url)
 
         try:
