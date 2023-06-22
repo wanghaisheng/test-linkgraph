@@ -23,8 +23,12 @@ async def nologin():
         
         page = await browser.new_page()
     
-        keyword = os.getenv('keyword')
-    
+        # keyword = os.getenv('keyword')
+        # url="https://www.linkgraph.com/content-planner-tool/"
+        # await page.goto(url)
+        # visible = await page.get_by_role('keyword').is_visible()
+        # await page.get_by_role('keyword').fill(keyword)
+        # await page.locator('.display-flex > button:nth-child(2)').click()
         url = "https://dashboard.linkgraph.com/content/content-planner/public?keyword=" + keyword
         response =await page.goto(url)
     
@@ -36,7 +40,8 @@ async def nologin():
                 await page.goto(response.url   )
 
                 break
-            time.sleep(1)
+            time.sleep(5)
+            await page.reload()
         resulturl=page.url  
         while True: 
             await page.goto(resulturl)            
@@ -46,6 +51,8 @@ async def nologin():
             
             print('Still preparing, waiting another 10 seconds')
             time.sleep(10)
+            await page.reload()
+            
         print('URL:',page.url)
 
         try:
