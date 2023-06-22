@@ -40,7 +40,7 @@ async def nologin():
         print('URL:',page.url)
 
         try:
-            clusters_locator = page.locator('//html/body/div[1]/div/div[2]/div[2]/div[2]/div[2]/div/div/div[3]/div/div/div/div[1]/svg')
+            clusters_locator = page.locator('ant-collapse-item ant-collapse-no-arrow')
             if await clusters_locator.is_visible():
                 print(await clusters_locator.text_content())
                 await clusters_locator.click()
