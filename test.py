@@ -35,8 +35,9 @@ async def nologin():
 
                 break
             time.sleep(1)
-            
+        resulturl=page.url  
         while True: 
+            await page.goto(resulturl)            
             done=await not_finished(page)
             print('URL:',page.url)
             if done:
