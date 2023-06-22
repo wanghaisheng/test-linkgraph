@@ -28,7 +28,14 @@ async def nologin():
         url = "https://dashboard.linkgraph.com/content/content-planner/public?keyword=" + keyword
         await page.goto(url)
     
-    
+        while True:
+            redirect= 'public_hash' in page.url            
+            if redirect:
+                await page.goto(page.url   )
+
+                break
+            time.sleep(1)
+            
         while True: 
             done=await not_finished(page)
             print('URL:',page.url)
