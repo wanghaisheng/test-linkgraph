@@ -27,7 +27,7 @@ async def nologin():
                 print('11111:', result)
                 print('URL:',page.url)
                 break
-            print('ooooo:', result.find("Creating clusters takes up to 2 minutes") != -1  )
+            print('ooooo:', await topic_found_locator.text_content().find("Creating clusters takes up to 2 minutes") != -1  )
             print('Still preparing, waiting another 10 seconds')
             time.sleep(10)
         print('didi:', result)
