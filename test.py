@@ -7,7 +7,7 @@ from playwright.async_api import expect,async_playwright
 
 STATUS_CONTAINER='.ant-row.ant-row-no-wrap.ant-row-space-between'
 processing="Creating clusters takes up to 2 minutes"
-finished="topic found for"
+finished="topic ideas found"
 
 async def not_finished(page) -> bool:
     s = await page.locator(STATUS_CONTAINER).text_content()
