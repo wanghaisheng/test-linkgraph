@@ -19,19 +19,13 @@ async def nologin():
     topic_found = '.ant-row.ant-row-no-wrap.ant-row-space-between'
     topic_found_locator = page.locator(topic_found)
     result = await topic_found_locator.text_content()
-    done=False
-    while done==False:
-        notdone="Creating clusters takes up to 2 minutes" in result
+
+    while "Creating clusters takes up to 2 minutes" in result:
         print('didi:', result)
-       
-        if notdone:
-            print('Still preparing, waiting another 30 seconds')
-            time.sleep(30)
-            done=False
-        else:
-            print('Cluster is prepared')
-            done=True
-            break
+        print('didi:', result.find("Creating clusters takes up to 2 minutes") != -1  )
+        print('Still preparing, waiting another 30 seconds')
+        time.sleep(10)
+
     # print('URL:',page.url)
     try:
         clusters_locator = page.locator('div.sc-jMFEJM.eaxCEo > div > div > div:nth-child(3) > div > div > div > div:nth-child(1) > svg')
