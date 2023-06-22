@@ -12,7 +12,7 @@ finished="topic found for"
 async def not_finished(page) -> bool:
     s = await page.locator(STATUS_CONTAINER).text_content()
     print('current text:',s)
-    return s.find(processing) != -1
+    return s.find(finished) == -1
 async def nologin():
     async with async_playwright() as playwright:
         botright_client = await botright.Botright(headless=True)
@@ -29,8 +29,11 @@ async def nologin():
         await page.goto(url)
     
     
-        while await not_finished(page):
+        while True: 
+            done=await not_finished(page)
             print('URL:',page.url)
+            if done:
+                break
             
             print('Still preparing, waiting another 10 seconds')
             time.sleep(10)
