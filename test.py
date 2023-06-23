@@ -115,7 +115,7 @@ async def nologin():
                     print(f'i{i}')
                     button='//*[@id="__next"]/div/div/div[2]/div[2]/div[2]/div/div/div[3]/div[2]/div/div/div['+i+1+']/div/button'
                     # //*[@id="__next"]/div/div/div[2]/div[2]/div[2]/div/div/div[3]/div[2]/div/div/div[1]/div/button/div
-                    print(f'{button}')
+                    print(f'button:{button}')
                     view_cluster_button= page.locator(button)
                     if await view_cluster_button.is_visible():
                         print(f'find {i} button')
