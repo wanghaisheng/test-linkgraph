@@ -105,12 +105,13 @@ async def nologin():
             
                 os.makedirs(".output", exist_ok=True)
                 await page.screenshot(path="./output/1.png", full_page=True)
-            
-                counts = await page.locator('//*[@id="__next"]/div/div/div[2]/div[2]/div[2]/div/div/div[3]/div[2]/div/div/div').count()
+                view_cluster_sel='//*[@id="__next"]/div/div/div[2]/div[2]/div[2]/div/div/div[3]/div[2]/div/div/div'
+                view_cluster_sel='//*[@id="__next"]/div/div/div[2]/div[2]/div[2]/div/div/div[3]/div[2]/div/div/div/div/button'
+                counts = await page.locator(view_cluster_sel).count()
                 print('counts:', counts)
             
                 for i in range(0,counts):   
-                    topic=await page.get_by_role("button", name="View Cluster").nth(i)
+                    topic=await page.ocator(view_cluster_sel).nth(i)
                     print(f'i{i}')
                     
                     await topic.click()
