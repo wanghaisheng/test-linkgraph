@@ -87,7 +87,8 @@ async def nologin():
                 print('URL:',page.url)
 
                 try:
-                    sel='ant-collapse-item ant-collapse-no-arrow'
+                    sel='//*[@id="__next"]/div/div/div[2]/div[2]/div[2]/div/div/div[3]/div/div/div'
+                    # sel='ant-collapse-item ant-collapse-no-arrow'
                     clusters_locator = page.locator(sel)
                     print(await clusters_locator.text_content())
 
