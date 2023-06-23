@@ -115,8 +115,11 @@ async def nologin():
                     print(f'i{i}')
                     button='//*[@id="__next"]/div/div/div[2]/div[2]/div[2]/div/div/div[3]/div[2]/div/div/div['+i+1+']/div/button'
                     # //*[@id="__next"]/div/div/div[2]/div[2]/div[2]/div/div/div[3]/div[2]/div/div/div[1]/div/button/div
-                    
-                    await page.locator(button).click()
+                    print(f'{button}')
+                    view_cluster_button= page.locator(button)
+                    if await view_cluster_button.is_visible():
+                        print(f'find {i} button')
+                    await view_cluster_button.click()
                     MONTHLY_SEARCH_VOLUME=await page.locator("//html/body/div[3]/div/div[2]/div/div[2]/div[1]/div[2]/div[1]/div[2]").text_content()
                     TOTAL_TRAFFIC=await page.locator("//html/body/div[3]/div/div[2]/div/div[2]/div[1]/div[2]/div[2]/div[2]").text_content()
                     RANKING_POTENTIAL=await page.locator("//html/body/div[3]/div/div[2]/div/div[2]/div[1]/div[2]/div[3]/div[2]/div").text_content()
