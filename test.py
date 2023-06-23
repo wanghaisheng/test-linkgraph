@@ -92,9 +92,9 @@ async def nologin():
                     clusters_locator = page.locator(sel)
                     print(await clusters_locator.text_content())
 
-                    sel="#__next > div > div > div:nth-child(2) > div:nth-child(2) > div.sc-fduepK.hAwtCS > div > div > div:nth-child(3) > div > div > div > div:nth-child(1)"
-                    clusters_locator = page.locator(sel)
-                    print(await clusters_locator.text_content())
+                    # sel="#__next > div > div > div:nth-child(2) > div:nth-child(2) > div.sc-fduepK.hAwtCS > div > div > div:nth-child(3) > div > div > div > div:nth-child(1)"
+                    # clusters_locator = page.locator(sel)
+                    # print(await clusters_locator.text_content())
                     if await clusters_locator.is_visible():
                         print('find All Clusters')
                         await clusters_locator.click()
@@ -106,15 +106,14 @@ async def nologin():
                 os.makedirs(".output", exist_ok=True)
                 await page.screenshot(path="./output/1.png", full_page=True)
                 view_cluster_sel='//*[@id="__next"]/div/div/div[2]/div[2]/div[2]/div/div/div[3]/div[2]/div/div/div'
-                view_cluster_sel='//*[@id="__next"]/div/div/div[2]/div[2]/div[2]/div/div/div[3]/div[2]/div/div/div/div/button'
+
                 counts = await page.locator(view_cluster_sel).count()
                 print('counts:', counts)
             
                 for i in range(0,counts):   
-                    topic=await page.ocator(view_cluster_sel).nth(i)
+                    topic=await page.locator(view_cluster_sel).nth(i)
                     print(f'i{i}')
-                    
-                    await topic.click()
+                    await topic.locator('//div/button').click()
                     MONTHLY_SEARCH_VOLUME=await page.locator("div.sc-jNxMLV:nth-child(1)").text_content()
                     TOTAL_TRAFFIC=await page.locator("div.sc-jNxMLV:nth-child(2)").text_content()
                     RANKING_POTENTIAL=await page.locator("div.sc-jNxMLV:nth-child(3)").text_content()
