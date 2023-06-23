@@ -35,19 +35,20 @@ async def nologin():
 
 
         while True: 
-            # await page.goto(resulturl)            
             done=await not_finished(page)
             if done:
                 break
             
-            print('Still preparing, waiting another 10 seconds')
-            time.sleep(10)
-            await page.reload()
+            print('Still preparing, waiting another 30 seconds')
+            time.sleep(30)
+            # await page.reload()
             
         print('URL:',page.url)
 
         try:
-            clusters_locator = page.locator('ant-collapse-item ant-collapse-no-arrow')
+            sel='ant-collapse-item ant-collapse-no-arrow'
+            sel="#__next > div > div > div:nth-child(2) > div:nth-child(2) > div.sc-fduepK.hAwtCS > div > div > div:nth-child(3) > div > div > div > div:nth-child(1)"
+            clusters_locator = page.locator(sel)
             if await clusters_locator.is_visible():
                 print(await clusters_locator.text_content())
                 await clusters_locator.click()
