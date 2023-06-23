@@ -77,7 +77,7 @@ async def nologin():
                 print(f'Still preparing, waiting another{start}* 30 seconds')
                 time.sleep(30)
                 start=start+1
-                # await page.reload()
+                await page.reload()
             # End the timer
             end_time = time.time()
 
