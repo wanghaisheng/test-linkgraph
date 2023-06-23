@@ -111,9 +111,10 @@ async def nologin():
                 print('counts:', counts)
             
                 for i in range(0,counts):   
-                    topic=await page.locator(view_cluster_sel).nth(i)
+                    # topic=await page.locator(view_cluster_sel).nth(i)
                     print(f'i{i}')
-                    await topic.locator('//div/button').click()
+                    button='//*[@id="__next"]/div/div/div[2]/div[2]/div[2]/div/div/div[3]/div[2]/div/div/div['+i+1+']/div/button'
+                    await page.locator(button).click()
                     MONTHLY_SEARCH_VOLUME=await page.locator("div.sc-jNxMLV:nth-child(1)").text_content()
                     TOTAL_TRAFFIC=await page.locator("div.sc-jNxMLV:nth-child(2)").text_content()
                     RANKING_POTENTIAL=await page.locator("div.sc-jNxMLV:nth-child(3)").text_content()
