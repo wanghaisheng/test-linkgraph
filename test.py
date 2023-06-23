@@ -53,12 +53,18 @@ async def nologin():
         # await page.locator('.display-flex > button:nth-child(2)').click()
         url = "https://dashboard.linkgraph.com/content/content-planner/public?keyword=" + keyword
         response =await page.goto(url)
+        try:
         
-        quota="#__next > div > div:nth-child(2) > div:nth-child(2) > div.sc-McAUB.dmSUED > div > div.sc-eZkcaX.kOaJEY"
-        s = await page.locator(quota).text_content()
-        if not  "Your Content Ideas quota was consumed" in s:
+            quota="#__next > div > div:nth-child(2) > div:nth-child(2) > div.sc-McAUB.dmSUED > div > div.sc-eZkcaX.kOaJEY"
+            s = await page.locator(quota).text_content()
+        except:
+            print('can not load quota check ',page.url)
+        if   "Your Content Ideas quota was consumed" in s:
+        
+        
             print('there is no left quota for this ip')
 
+        else:
             await page.wait_for_url("https://dashboard.linkgraph.com/content/content-planner/public/**")
             start=0
             start_time = time.time()
