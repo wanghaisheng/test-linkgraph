@@ -96,7 +96,7 @@ async def nologin():
                     clusters_locator = page.locator(sel)
                     print(await clusters_locator.text_content())
                     if await clusters_locator.is_visible():
-                        print(await clusters_locator.text_content())
+                        print('find All Clusters')
                         await clusters_locator.click()
                     else:
                         print('is_visible is failed')
@@ -106,7 +106,7 @@ async def nologin():
                 os.makedirs(".output", exist_ok=True)
                 await page.screenshot(path="./output/1.png", full_page=True)
             
-                counts = await page.locator("div.sc-jMFEJM.eaxCEo > div > div > div.ant-collapse-item.ant-collapse-item-active.ant-collapse-no-arrow > div.ant-collapse-content.ant-collapse-content-active > div > div > div").count()
+                counts = await page.locator('//*[@id="__next"]/div/div/div[2]/div[2]/div[2]/div/div/div[3]/div[2]/div/div/div').count()
                 print('counts:', counts)
             
                 # for i in range(0,counts):   
