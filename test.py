@@ -114,10 +114,12 @@ async def nologin():
                     # topic=await page.locator(view_cluster_sel).nth(i)
                     print(f'i{i}')
                     button='//*[@id="__next"]/div/div/div[2]/div[2]/div[2]/div/div/div[3]/div[2]/div/div/div['+i+1+']/div/button'
+                    # //*[@id="__next"]/div/div/div[2]/div[2]/div[2]/div/div/div[3]/div[2]/div/div/div[1]/div/button/div
+                    
                     await page.locator(button).click()
-                    MONTHLY_SEARCH_VOLUME=await page.locator("div.sc-jNxMLV:nth-child(1)").text_content()
-                    TOTAL_TRAFFIC=await page.locator("div.sc-jNxMLV:nth-child(2)").text_content()
-                    RANKING_POTENTIAL=await page.locator("div.sc-jNxMLV:nth-child(3)").text_content()
+                    MONTHLY_SEARCH_VOLUME=await page.locator("//html/body/div[3]/div/div[2]/div/div[2]/div[1]/div[2]/div[1]/div[2]").text_content()
+                    TOTAL_TRAFFIC=await page.locator("//html/body/div[3]/div/div[2]/div/div[2]/div[1]/div[2]/div[2]/div[2]").text_content()
+                    RANKING_POTENTIAL=await page.locator("//html/body/div[3]/div/div[2]/div/div[2]/div[1]/div[2]/div[3]/div[2]/div").text_content()
                     row_counts=await page.locator("tr.ant-table-row:nth-child").count()
                     print(f'MONTHLY_SEARCH_VOLUME{MONTHLY_SEARCH_VOLUME}')
                     print(f'TOTAL_TRAFFIC-{TOTAL_TRAFFIC}')
