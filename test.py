@@ -113,7 +113,7 @@ async def nologin():
                 for i in range(0,counts):   
                     # topic=await page.locator(view_cluster_sel).nth(i)
                     print(f'i{i}')
-                    button='//*[@id="__next"]/div/div/div[2]/div[2]/div[2]/div/div/div[3]/div[2]/div/div/div['+i+1+']/div/button'
+                    button='//*[@id="__next"]/div/div/div[2]/div[2]/div[2]/div/div/div[3]/div[2]/div/div/div['+str(i+1)+']/div/button'
                     # //*[@id="__next"]/div/div/div[2]/div[2]/div[2]/div/div/div[3]/div[2]/div/div/div[1]/div/button/div
                     print(f'button:{button}')
                     # view_cluster_button= page.locator(button)
