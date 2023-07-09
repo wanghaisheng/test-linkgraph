@@ -59,7 +59,7 @@ jobs:
           keyword: '${{ github.event.inputs.keyword }}'
           
         with:
-          tag_name: ${{keyword}}-v${{ github.run_number }}
+          tag_name: '${{ github.event.inputs.keyword }}'-v${{ github.run_number }}
           release_name: Release ${{ github.run_number }}
           draft: false
           prerelease: false
