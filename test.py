@@ -149,7 +149,6 @@ async def nologin():
                 await browser.close()
         except:
             print('can not load quota check ',page.url)
-            break
 async def main():
     botright_client = await botright.Botright(headless=True)
 
