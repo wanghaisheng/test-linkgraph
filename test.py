@@ -122,22 +122,24 @@ async def nologin():
                             await view_cluster_button.click()
                             MONTHLY_SEARCH_VOLUME=await page.locator("//html/body/div[3]/div/div[2]/div/div[2]/div[1]/div[2]/div[1]/div[2]").text_content()
                             TOTAL_TRAFFIC=await page.locator("//html/body/div[3]/div/div[2]/div/div[2]/div[1]/div[2]/div[2]/div[2]").text_content()
-                            # RANKING_POTENTIAL=await page.locator("//html/body/div[3]/div/div[2]/div/div[2]/div[1]/div[2]/div[3]/div[2]/div").text_content()
-                            # row_counts=await page.locator("tr.ant-table-row:nth-child").count()
-                            print(f'MONTHLY_SEARCH_VOLUME{MONTHLY_SEARCH_VOLUME}')
+                            RANKING_POTENTIAL=await page.locator("//html/body/div[3]/div/div[2]/div/div[2]/div[1]/div[2]/div[3]/div[2]/div").text_content()
+                            row_counts=await page.locator("tr.ant-table-row:nth-child").count()
+                            print(f'MONTHLY_SEARCH_VOLUME-{MONTHLY_SEARCH_VOLUME}')
                             print(f'TOTAL_TRAFFIC-{TOTAL_TRAFFIC}')
-                            # print(f'RANKING_POTENTIAL-{RANKING_POTENTIAL}')
-                            # print(f'row_counts-{row_counts}')
+                            print(f'RANKING_POTENTIAL-{RANKING_POTENTIAL}')
+                            print(f'row_counts-{row_counts}')
                     
-                            # for i in range(0,row_counts):
-                            #     KEYWORDS_IN_CLUSTER =await page.locator("td.ant-table-cell").nth(1)
-                            #     MSV =await page.locator("td.ant-table-cell").nth(2)
-                            #     CPC =await page.locator("td.ant-table-cell").nth(3)
-                            #     print(f'KEYWORDS_IN_CLUSTER-{KEYWORDS_IN_CLUSTER}')
-                            #     print(f'MSV-{MSV}')
-                            #     print(f'CPC-{CPC}')                            
+                            for i in range(0,row_counts):
+                                KEYWORDS_IN_CLUSTER =await page.locator("td.ant-table-cell").nth(1)
+                                MSV =await page.locator("td.ant-table-cell").nth(2)
+                                CPC =await page.locator("td.ant-table-cell").nth(3)
+                                print(f'KEYWORDS_IN_CLUSTER-{KEYWORDS_IN_CLUSTER}')
+                                print(f'MSV-{MSV}')
+                                print(f'CPC-{CPC}')                            
                             
-                            await page.screenshot(path="./output/"+keyword+".png", full_page=True)
+                            close_cluster_button= page.locator(".ant-modal-close")
+                            await close_cluster_button.click()
+                            # await page.screenshot(path="./output/"+keyword+".png", full_page=True)
 
                     except:
                         print('cannot load view cluster button')
