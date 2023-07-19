@@ -137,7 +137,7 @@ async def nologin():
                             #     print(f'MSV-{MSV}')
                             #     print(f'CPC-{CPC}')                            
                             
-                            await page.screenshot(path="./output/1.png", full_page=True)
+                            await page.screenshot(path="./output/"+keyword+".png", full_page=True)
 
                     except:
                         print('cannot load view cluster button')
