@@ -123,11 +123,11 @@ async def nologin():
                             MONTHLY_SEARCH_VOLUME=await page.locator("//html/body/div[3]/div/div[2]/div/div[2]/div[1]/div[2]/div[1]/div[2]").text_content()
                             TOTAL_TRAFFIC=await page.locator("//html/body/div[3]/div/div[2]/div/div[2]/div[1]/div[2]/div[2]/div[2]").text_content()
                             RANKING_POTENTIAL=await page.locator("//html/body/div[3]/div/div[2]/div/div[2]/div[1]/div[2]/div[3]/div[2]/div").text_content()
-                            row_counts=await page.locator("tr.ant-table-row:nth-child").count()
                             print(f'MONTHLY_SEARCH_VOLUME-{MONTHLY_SEARCH_VOLUME}')
                             print(f'TOTAL_TRAFFIC-{TOTAL_TRAFFIC}')
                             print(f'RANKING_POTENTIAL-{RANKING_POTENTIAL}')
                             print(f'row_counts-{row_counts}')
+                            row_counts=await page.locator("tr.ant-table-row:nth-child").count()
                     
                             for i in range(0,row_counts):
                                 KEYWORDS_IN_CLUSTER =await page.locator("td.ant-table-cell").nth(1)
