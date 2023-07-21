@@ -116,27 +116,27 @@ async def nologin():
                         await view_cluster_button.click()     
                         index=0
                         while index==counts:
-                        MONTHLY_SEARCH_VOLUME=await page.locator("//html/body/div[3]/div/div[2]/div/div[2]/div[1]/div[2]/div[1]/div[2]").text_content()
-                        TOTAL_TRAFFIC=await page.locator("//html/body/div[3]/div/div[2]/div/div[2]/div[1]/div[2]/div[2]/div[2]").text_content()
-                        RANKING_POTENTIAL=await page.locator("//html/body/div[3]/div/div[2]/div/div[2]/div[1]/div[2]/div[3]/div[2]/div").text_content()
-                        print(f'MONTHLY_SEARCH_VOLUME-{MONTHLY_SEARCH_VOLUME}')
-                        print(f'TOTAL_TRAFFIC-{TOTAL_TRAFFIC}')
-                        print(f'RANKING_POTENTIAL-{RANKING_POTENTIAL}')
-                        print(f'row_counts-{row_counts}')
-                        row_counts=await page.locator("tr.ant-table-row:nth-child").count()
-                
-                        for i in range(0,row_counts):
-                            KEYWORDS_IN_CLUSTER =await page.locator("td.ant-table-cell").nth(1)
-                            MSV =await page.locator("td.ant-table-cell").nth(2)
-                            CPC =await page.locator("td.ant-table-cell").nth(3)
-                            print(f'KEYWORDS_IN_CLUSTER-{KEYWORDS_IN_CLUSTER}')
-                            print(f'MSV-{MSV}')
-                            print(f'CPC-{CPC}')                            
-                        
-                        next_button= page.locator(".ant-modal-body > div:nth-child(1) > button:nth-child(2)")
-                        await next_button.click()
-                        index=index+1
-                        # await page.screenshot(path="./output/"+keyword+".png", full_page=True)
+                            MONTHLY_SEARCH_VOLUME=await page.locator("//html/body/div[3]/div/div[2]/div/div[2]/div[1]/div[2]/div[1]/div[2]").text_content()
+                            TOTAL_TRAFFIC=await page.locator("//html/body/div[3]/div/div[2]/div/div[2]/div[1]/div[2]/div[2]/div[2]").text_content()
+                            RANKING_POTENTIAL=await page.locator("//html/body/div[3]/div/div[2]/div/div[2]/div[1]/div[2]/div[3]/div[2]/div").text_content()
+                            print(f'MONTHLY_SEARCH_VOLUME-{MONTHLY_SEARCH_VOLUME}')
+                            print(f'TOTAL_TRAFFIC-{TOTAL_TRAFFIC}')
+                            print(f'RANKING_POTENTIAL-{RANKING_POTENTIAL}')
+                            print(f'row_counts-{row_counts}')
+                            row_counts=await page.locator("tr.ant-table-row:nth-child").count()
+                    
+                            for i in range(0,row_counts):
+                                KEYWORDS_IN_CLUSTER =await page.locator("td.ant-table-cell").nth(1)
+                                MSV =await page.locator("td.ant-table-cell").nth(2)
+                                CPC =await page.locator("td.ant-table-cell").nth(3)
+                                print(f'KEYWORDS_IN_CLUSTER-{KEYWORDS_IN_CLUSTER}')
+                                print(f'MSV-{MSV}')
+                                print(f'CPC-{CPC}')                            
+                            
+                            next_button= page.locator(".ant-modal-body > div:nth-child(1) > button:nth-child(2)")
+                            await next_button.click()
+                            index=index+1
+                            # await page.screenshot(path="./output/"+keyword+".png", full_page=True)
 
                 except:
                     print('cannot load view cluster button')                
