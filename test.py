@@ -112,7 +112,8 @@ async def nologin():
 
                     button='//*[@id="__next"]/div/div/div[2]/div[2]/div[2]/div/div/div[3]/div[2]/div/div/div['+str(0+1)+']/div/button'
                     view_cluster_button= page.locator(button)
-                    if await view_cluster_button.is_visible():
+                    visible = await view_cluster_button.is_visible()
+                    if visible:
                         await view_cluster_button.click()     
                         index=0
                         while index < counts:
