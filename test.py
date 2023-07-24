@@ -127,8 +127,8 @@ async def nologin():
                             print(f'MONTHLY_SEARCH_VOLUME-{MONTHLY_SEARCH_VOLUME}')
                             print(f'TOTAL_TRAFFIC-{TOTAL_TRAFFIC}')
                             print(f'RANKING_POTENTIAL-{RANKING_POTENTIAL}')
+                            row_counts=await page.locator("tr.ant-table-row").count()
                             print(f'row_counts-{row_counts}')
-                            row_counts=await page.locator("tr.ant-table-row:nth-child").count()
                     
                             for i in range(0,row_counts):
                                 KEYWORDS_IN_CLUSTER =await page.locator("td.ant-table-cell").nth(1)
