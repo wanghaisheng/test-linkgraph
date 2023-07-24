@@ -74,6 +74,7 @@ async def nologin():
                         break
                     
                     print(f'Still preparing, waiting another{start}* 30 seconds')
+                    
                     time.sleep(30)
                     start=start+1
                     await page.reload()
@@ -111,8 +112,11 @@ async def nologin():
                 try:
 
                     button='//*[@id="__next"]/div/div/div[2]/div[2]/div[2]/div/div/div[3]/div[2]/div/div/div[1]/div/button'
+
                     view_cluster_button= page.locator(button)
                     visible = await view_cluster_button.is_visible()
+                    print('find 1 Clusters click')
+                    
                     if visible:
                         await view_cluster_button.click()     
                         index=0
