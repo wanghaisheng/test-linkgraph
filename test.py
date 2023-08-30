@@ -131,16 +131,18 @@ async def nologin():
                             print(f'MONTHLY_SEARCH_VOLUME-{MONTHLY_SEARCH_VOLUME}')
                             print(f'TOTAL_TRAFFIC-{TOTAL_TRAFFIC}')
                             print(f'RANKING_POTENTIAL-{RANKING_POTENTIAL}')
-                            row_counts=await page.locator("tr.ant-table-row").count()
+                            row_contents=await page.locator(".ant-table-tbody").all_text_contents()
+                            print('all',row_contents)
+                            row_counts=await page.locator("//html/body/div[5]/div/div[2]/div/div[2]/div[1]/div[3]/div/div/div/div/div/div/table/tbody/tr").count()
                             print(f'row_counts-{row_counts}')
                     
-                            for i in range(0,row_counts):
-                                KEYWORDS_IN_CLUSTER =await page.locator("td.ant-table-cell").nth(1)
-                                MSV =await page.locator("td.ant-table-cell").nth(2)
-                                CPC =await page.locator("td.ant-table-cell").nth(3)
-                                print(f'KEYWORDS_IN_CLUSTER-{KEYWORDS_IN_CLUSTER}')
-                                print(f'MSV-{MSV}')
-                                print(f'CPC-{CPC}')                            
+                            # for i in range(0,row_counts):
+                            #     KEYWORDS_IN_CLUSTER =await page.locator("td.ant-table-cell").nth(1)
+                            #     MSV =await page.locator("td.ant-table-cell").nth(2)
+                            #     CPC =await page.locator("td.ant-table-cell").nth(3)
+                            #     print(f'KEYWORDS_IN_CLUSTER-{KEYWORDS_IN_CLUSTER}')
+                            #     print(f'MSV-{MSV}')
+                            #     print(f'CPC-{CPC}')                            
                             
                             next_button= page.locator(".ant-modal-body > div:nth-child(1) > button:nth-child(2)")
                             await next_button.click()
