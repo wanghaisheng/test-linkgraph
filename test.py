@@ -63,7 +63,7 @@ async def nologin():
         
             quota="#__next > div > div:nth-child(2) > div:nth-child(2) > div.sc-McAUB.dmSUED > div > div.sc-eZkcaX.kOaJEY"
             s = await page.locator(quota).text_content()
-
+            print(f's:{s}')
             if   "Your Content Ideas quota was consumed" in s:
             
             
