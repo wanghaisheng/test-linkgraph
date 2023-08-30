@@ -56,7 +56,9 @@ async def nologin():
         # await page.get_by_role('keyword').fill(keyword)
         # await page.locator('.display-flex > button:nth-child(2)').click()
         url = "https://dashboard.linkgraph.com/content/content-planner/public?keyword=" + keyword
+        os.makedirs(".output", exist_ok=True)        
         response =await page.goto(url)
+        
         try:
         
             quota="#__next > div > div:nth-child(2) > div:nth-child(2) > div.sc-McAUB.dmSUED > div > div.sc-eZkcaX.kOaJEY"
@@ -108,7 +110,7 @@ async def nologin():
                 except:
                     print('xpath is failed')
             
-                os.makedirs(".output", exist_ok=True)
+
                 view_cluster_sel='//*[@id="__next"]/div/div/div[2]/div[2]/div[2]/div/div/div[3]/div[2]/div/div/div'
 
                 counts = await page.locator(view_cluster_sel).count()
@@ -150,6 +152,8 @@ async def nologin():
                             # await page.screenshot(path="./output/"+keyword+".png", full_page=True)
 
                 except:
+                    await page.screenshot(path="./output/loadviewcluster.png", full_page=True)            
+                    
                     print('cannot load view cluster button')                
 
 
@@ -159,6 +163,7 @@ async def nologin():
                 # await botright_client.close()
                 await browser.close()
         except:
+            await page.screenshot(path="./output/loadquotacheck.png", full_page=True)            
             print('can not load quota check ',page.url)
 async def main():
     botright_client = await botright.Botright(headless=True)
