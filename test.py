@@ -58,7 +58,7 @@ async def nologin():
         url = "https://dashboard.linkgraph.com/content/content-planner/public?keyword=" + keyword
         os.makedirs(".output", exist_ok=True)        
         response =await page.goto(url)
-        
+        time.sleep(30)
         try:
         
             quota="#__next > div > div:nth-child(2) > div:nth-child(2) > div.sc-McAUB.dmSUED > div > div.sc-eZkcaX.kOaJEY"
