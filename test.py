@@ -116,6 +116,10 @@ async def nologincheck():
                 await view_cluster_button.click()     
                 index=0
                 while index < counts:
+                    print(f'index:{index}')
+                    all=await page.locator(".ant-modal-body").all_text_contents()
+                    print(f'all:{all}')
+
                     MONTHLY_SEARCH_VOLUME=await page.locator("//html/body/div[3]/div/div[2]/div/div[2]/div[1]/div[2]/div[1]/div[2]").text_content()
                     TOTAL_TRAFFIC=await page.locator("//html/body/div[3]/div/div[2]/div/div[2]/div[1]/div[2]/div[2]/div[2]").text_content()
                     RANKING_POTENTIAL=await page.locator("//html/body/div[3]/div/div[2]/div/div[2]/div[1]/div[2]/div[3]/div[2]/div").text_content()
