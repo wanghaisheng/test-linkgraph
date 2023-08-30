@@ -13,6 +13,145 @@ async def not_finished(page) -> bool:
     s = await page.locator(STATUS_CONTAINER).text_content()
     print('current text:',s)
     return s.find(finished) != -1
+async def nologincheck():
+    os_type = platform.system()
+    
+    async with async_playwright() as playwright:
+        headless=True
+        if os_type in ["Windows","Darwin"]:
+            headless=False
+        
+        browser =  await playwright.chromium.launch(headless=headless)
+
+        # botright_client = await botright.Botright(headless=True)
+    
+
+        # browser = await botright_client.new_browser()
+        # Set up the SOCKS5 proxy configuration
+
+        os_type = platform.system()
+
+        keyword = os.getenv('keyword')        
+        page=None
+        if os_type in ["Windows","Darwin"]:
+    
+            proxy_server = {"server":'socks5://127.0.0.1:1080'} # Replace with your SOCKS5 proxy server details
+    
+            context = await browser.new_context(
+                proxy=proxy_server,
+                bypass_csp=True  # Optional: Add any other context options as needed
+            )            
+            page = await context.new_page()
+            keyword ="temu"
+
+        else:
+            context = await browser.new_context(
+                bypass_csp=True  # Optional: Add any other context options as needed
+            )                        
+            page = await browser.new_page()
+            
+        # url="https://www.linkgraph.com/content-planner-tool/"
+        # await page.goto(url)
+        # visible = await page.get_by_role('keyword').is_visible()
+        # await page.get_by_role('keyword').fill(keyword)
+        # await page.locator('.display-flex > button:nth-child(2)').click()
+        url = "https://dashboard.linkgraph.com/content/content-planner/public?keyword=" + keyword
+        os.makedirs(".output", exist_ok=True)        
+        response =await page.goto(url)
+
+        await page.wait_for_url("https://dashboard.linkgraph.com/content/content-planner/public/**")
+        start=0
+        start_time = time.time()
+
+        while True: 
+            done=await not_finished(page)
+            if done:
+                break
+            
+            print(f'Still preparing, waiting another{start}* 30 seconds')
+            
+            time.sleep(30)
+            start=start+1
+            await page.reload()
+        # End the timer
+        end_time = time.time()
+
+        # Calculate the running time
+        running_time = end_time - start_time          
+        print("Running Time:", running_time, "seconds")
+        
+        print('URL:',page.url)
+
+        try:
+            sel='//*[@id="__next"]/div/div/div[2]/div[2]/div[2]/div/div/div[3]/div/div/div'
+            # sel='ant-collapse-item ant-collapse-no-arrow'
+            clusters_locator = page.locator(sel)
+            print(await clusters_locator.text_content())
+
+            # sel="#__next > div > div > div:nth-child(2) > div:nth-child(2) > div.sc-fduepK.hAwtCS > div > div > div:nth-child(3) > div > div > div > div:nth-child(1)"
+            # clusters_locator = page.locator(sel)
+            # print(await clusters_locator.text_content())
+            if await clusters_locator.is_visible():
+                print('find All Clusters')
+                await clusters_locator.click()
+            else:
+                print('is_visible is failed')
+        except:
+            print('xpath is failed')
+    
+
+        view_cluster_sel='//*[@id="__next"]/div/div/div[2]/div[2]/div[2]/div/div/div[3]/div[2]/div/div/div'
+
+        counts = await page.locator(view_cluster_sel).count()
+        print('counts:', counts)
+        try:
+
+            button='//*[@id="__next"]/div/div/div[2]/div[2]/div[2]/div/div/div[3]/div[2]/div/div/div[1]/div/button'
+
+            view_cluster_button= page.locator(button)
+            visible = await view_cluster_button.is_visible()
+            print('find 1 Clusters click')
+            
+            if visible:
+                await view_cluster_button.click()     
+                index=0
+                while index < counts:
+                    MONTHLY_SEARCH_VOLUME=await page.locator("//html/body/div[3]/div/div[2]/div/div[2]/div[1]/div[2]/div[1]/div[2]").text_content()
+                    TOTAL_TRAFFIC=await page.locator("//html/body/div[3]/div/div[2]/div/div[2]/div[1]/div[2]/div[2]/div[2]").text_content()
+                    RANKING_POTENTIAL=await page.locator("//html/body/div[3]/div/div[2]/div/div[2]/div[1]/div[2]/div[3]/div[2]/div").text_content()
+                    print(f'MONTHLY_SEARCH_VOLUME-{MONTHLY_SEARCH_VOLUME}')
+                    print(f'TOTAL_TRAFFIC-{TOTAL_TRAFFIC}')
+                    print(f'RANKING_POTENTIAL-{RANKING_POTENTIAL}')
+                    row_contents=await page.locator(".ant-table-tbody").all_text_contents()
+                    print('all',row_contents)
+                    row_counts=await page.locator("//html/body/div[5]/div/div[2]/div/div[2]/div[1]/div[3]/div/div/div/div/div/div/table/tbody/tr").count()
+                    print(f'row_counts-{row_counts}')
+            
+                    # for i in range(0,row_counts):
+                    #     KEYWORDS_IN_CLUSTER =await page.locator("td.ant-table-cell").nth(1)
+                    #     MSV =await page.locator("td.ant-table-cell").nth(2)
+                    #     CPC =await page.locator("td.ant-table-cell").nth(3)
+                    #     print(f'KEYWORDS_IN_CLUSTER-{KEYWORDS_IN_CLUSTER}')
+                    #     print(f'MSV-{MSV}')
+                    #     print(f'CPC-{CPC}')                            
+                    
+                    next_button= page.locator(".ant-modal-body > div:nth-child(1) > button:nth-child(2)")
+                    await next_button.click()
+                    index=index+1
+                    # await page.screenshot(path="./output/"+keyword+".png", full_page=True)
+
+        except:
+            await page.screenshot(path="./output/loadviewcluster.png", full_page=True)            
+            
+            print('cannot load view cluster button')                
+
+
+
+    
+        #       # Continue by using the Page
+        # await botright_client.close()
+        await browser.close()
+
 async def nologin():
     os_type = platform.system()
     
@@ -219,4 +358,4 @@ async def main():
     await botright_client.close()
 
 if __name__ == "__main__":
-    asyncio.run(nologin())
+    asyncio.run(nologincheck())
