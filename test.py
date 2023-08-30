@@ -31,19 +31,23 @@ async def nologin():
 
         os_type = platform.system()
 
-        proxy_server = {"server":'socks5://127.0.0.1:1080'} # Replace with your SOCKS5 proxy server details
-
-        context = await browser.new_context(
-            proxy=proxy_server,
-            bypass_csp=True  # Optional: Add any other context options as needed
-        )
         keyword = os.getenv('keyword')        
         page=None
         if os_type in ["Windows","Darwin"]:
+    
+            proxy_server = {"server":'socks5://127.0.0.1:1080'} # Replace with your SOCKS5 proxy server details
+    
+            context = await browser.new_context(
+                proxy=proxy_server,
+                bypass_csp=True  # Optional: Add any other context options as needed
+            )            
             page = await context.new_page()
             keyword ="temu"
 
         else:
+            context = await browser.new_context(
+                bypass_csp=True  # Optional: Add any other context options as needed
+            )                        
             page = await browser.new_page()
             
         # url="https://www.linkgraph.com/content-planner-tool/"
