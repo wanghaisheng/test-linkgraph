@@ -110,7 +110,7 @@ async def nologincheck():
 
             view_cluster_button= page.locator(button)
             visible = await view_cluster_button.is_visible()
-            print('find 1 Clusters click')
+            print(f'find 1 Clusters click:{visible}')
             
             if visible:
                 await view_cluster_button.click()     
